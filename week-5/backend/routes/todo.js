@@ -8,6 +8,7 @@ router.use(authMiddleware);
 router.post("/addToDo", async (req, res, next) => {
   try {
     const title = req.body.title;
+    console.log(req.body);
     await ToDoModel.create({
       userId: req.userId,
       title: title,
