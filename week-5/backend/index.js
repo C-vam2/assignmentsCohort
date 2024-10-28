@@ -1,8 +1,19 @@
 // start writing from here
 const express = require("express");
+const todoRouter = require("./routes/todo");
+const userRouter = require("./routes/user");
+const { connectToDB } = require("./db/index");
+require("dotenv").config();
 
 const app = express();
 
-app.post('add')
+app.use(express.json());
 
-app.listen(3000);
+app.use("/user", userRouter);
+app.use("/todo", todoRouter);
+
+connectToDB().then(
+  app.listen(3000, () => {
+    console.log("Server listening on port 3000...");
+  })
+);
